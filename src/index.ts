@@ -9,14 +9,17 @@ interface Classes {
   day: number;
 }
 
-const readJupiterwebHTMLFile = async (file: any) => {
+export const readJupiterwebHTMLFile = async (file: any) => {
   const response = await fetch(file);
   const data = await response.text();
   const docs = new DOMParser().parseFromString(data, "text/html");
-  readHTMLGridDocument(docs);
+  const schedulesData = readHTMLGridDocument(docs);
+  return schedulesData;
 };
 
-const readHTMLGridDocument = (docs: HTMLDocument): ScheduleResponse[] => {
+export const readHTMLGridDocument = (
+  docs: HTMLDocument
+): ScheduleResponse[] => {
   const response: ScheduleResponse[] = [];
   const timeTable = docs.getElementById("tableGradeHoraria");
   const schedule = timeTable?.children[0].children;
