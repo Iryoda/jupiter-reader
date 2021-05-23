@@ -1,16 +1,31 @@
 {
-  "name": "easyjupitercalendar",
+  "name": "jupiter-reader",
   "version": "1.0.0",
   "main": "lib/index.js",
+  "description": "A jupiterweb timetable reader",
   "license": "MIT",
   "types": "lib",
+  "author": "Iryoda",
   "scripts": {
     "build": "tsc -p ."
   },
-  "dependencies": {},
   "devDependencies": {
-    "@types/es6-promise": "^3.3.0",
     "@types/typescript": "^2.0.0",
     "typescript": "^4.2.4"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Iryoda/jupiter-reader.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Iryoda/jupiter-reader/issues"
+  },
+  "homepage": "https://github.com/Iryoda/jupiter-reader#readme",
+  "directories": {
+    "lib": "lib"
+  },
+  "dependencies": {
+    "es6-promise": "^4.2.8"
+  },
+  "keywords": []
 }
