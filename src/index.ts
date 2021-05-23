@@ -9,16 +9,24 @@ interface Classes {
   day: number;
 }
 
-export const jupiteReadFromInput = (file: File | Blob) => {
+export const jupiteReadFromInput = (
+  file: File | Blob
+): Promise<DOMException | ScheduleResponse[]> => {
   const reader = new FileReader();
-  reader.onload = () => {
-    const data = reader.result as string;
-    const parser = new DOMParser();
-    const docs = parser.parseFromString(data, "text/html");
-    const schedulesData = readTimeTable(docs);
-    return schedulesData;
-  };
-  reader.readAsText(file);
+  return new Promise((resolve, reject) => {
+    reader.onerror = () => {
+      reader.abort();
+      reject(new DOMException("Problem parsing input file"));
+    };
+    reader.onload = () => {
+      const data = reader.result as string;
+      const parser = new DOMParser();
+      const docs = parser.parseFromString(data, "text/html");
+      const result = readTimeTable(docs);
+      resolve(result);
+    };
+    reader.readAsText(file);
+  });
 };
 
 export const readTimeTable = (docs: HTMLDocument): ScheduleResponse[] => {
@@ -36,13 +44,16 @@ export const readTimeTable = (docs: HTMLDocument): ScheduleResponse[] => {
       for (let j = 0; j < 5; j++) {
         const className = schedule[i].children[j + 2].children[0];
         className &&
-          classes.push({ name: className.children[0].innerHTML, day: j });
+          classes.push({
+            name: className.children[0].innerHTML,
+            day: j,
+          });
       }
 
       const readerData = {
         initTime: initTime || "",
         endTime: endTime || "",
-        classes: classes,
+        classes,
       };
 
       readerData && response.push(readerData);
