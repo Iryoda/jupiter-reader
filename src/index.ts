@@ -17,8 +17,8 @@ const handleGetInfo = async (file: any) => {
   handleDocument(docs);
 };
 
-const handleDocument = (docs: HTMLDocument) => {
-  const reponse = [{} as ScheduleResponse];
+const handleDocument = (docs: HTMLDocument): ScheduleResponse[] => {
+  const response: ScheduleResponse[] = [];
   const timeTable = docs.getElementById("tableGradeHoraria");
   const schedule = timeTable?.children[0].children;
 
@@ -34,13 +34,15 @@ const handleDocument = (docs: HTMLDocument) => {
         className &&
           classes.push({ name: className.children[0].innerHTML, day: j });
       }
-      const response = {
-        initTime: initTime,
-        endTime: endTime,
+
+      const readerData = {
+        initTime: initTime || "",
+        endTime: endTime || "",
         classes: classes,
       };
+
+      readerData && response.push(readerData);
     }
   }
+  return response;
 };
-
-handleGetInfo("./testFiles/TEST.html");
