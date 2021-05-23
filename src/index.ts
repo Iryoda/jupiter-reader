@@ -12,12 +12,11 @@ interface Classes {
 const readJupiterwebHTMLFile = async (file: any) => {
   const response = await fetch(file);
   const data = await response.text();
-  //   console.log(data);
   const docs = new DOMParser().parseFromString(data, "text/html");
-  readHTMLDocument(docs);
+  readHTMLGridDocument(docs);
 };
 
-const readHTMLDocument = (docs: HTMLDocument): ScheduleResponse[] => {
+const readHTMLGridDocument = (docs: HTMLDocument): ScheduleResponse[] => {
   const response: ScheduleResponse[] = [];
   const timeTable = docs.getElementById("tableGradeHoraria");
   const schedule = timeTable?.children[0].children;
