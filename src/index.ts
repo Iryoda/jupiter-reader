@@ -1,10 +1,10 @@
-interface ScheduleResponse {
+export interface ScheduleResponse {
   initTime: string;
   endTime: string;
   classes: Classes[];
 }
 
-interface Classes {
+export interface Classes {
   name: string;
   day: number;
 }
