@@ -9,15 +9,15 @@ interface Classes {
   day: number;
 }
 
-const handleGetInfo = async (file: any) => {
+const readJupiterwebHTMLFile = async (file: any) => {
   const response = await fetch(file);
   const data = await response.text();
   //   console.log(data);
   const docs = new DOMParser().parseFromString(data, "text/html");
-  handleDocument(docs);
+  readHTMLDocument(docs);
 };
 
-const handleDocument = (docs: HTMLDocument): ScheduleResponse[] => {
+const readHTMLDocument = (docs: HTMLDocument): ScheduleResponse[] => {
   const response: ScheduleResponse[] = [];
   const timeTable = docs.getElementById("tableGradeHoraria");
   const schedule = timeTable?.children[0].children;
