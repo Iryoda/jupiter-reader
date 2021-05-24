@@ -1,12 +1,13 @@
 {
   "name": "jupiter-reader",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "main": "lib/index.js",
   "description": "A jupiterweb timetable reader",
   "license": "MIT",
   "types": "lib",
   "author": "Iryoda",
   "scripts": {
+    "watch": "tsc -w -p .",
     "build": "tsc -p ."
   },
   "devDependencies": {

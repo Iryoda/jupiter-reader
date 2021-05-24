@@ -1,17 +1,17 @@
-export interface ScheduleResponse {
+export interface IScheduleResponse {
   initTime: string;
   endTime: string;
-  classes: Classes[];
+  classes: IClasses[];
 }
 
-export interface Classes {
+export interface IClasses {
   name: string;
   day: number;
 }
 
-export const jupiteReadFromInput = (
+export const jupiterReadFromInput = (
   file: File | Blob
-): Promise<DOMException | ScheduleResponse[]> => {
+): Promise<IScheduleResponse []> => {
   const reader = new FileReader();
   return new Promise((resolve, reject) => {
     reader.onerror = () => {
@@ -29,14 +29,14 @@ export const jupiteReadFromInput = (
   });
 };
 
-export const readTimeTable = (docs: HTMLDocument): ScheduleResponse[] => {
-  const response: ScheduleResponse[] = [];
+export const readTimeTable = (docs: HTMLDocument): IScheduleResponse [] => {
+  const response: IScheduleResponse [] = [];
   const timeTable = docs.getElementById("tableGradeHoraria");
   const schedule = timeTable?.children[0].children;
 
   if (schedule) {
     for (let i = 1; i < schedule?.length; i++) {
-      const classes: Classes[] = [];
+      const classes:IClasses[] = [];
       const initTime =
         schedule[i].children[0].childNodes[0].textContent?.trim();
       const endTime = schedule[i].children[1].childNodes[0].textContent?.trim();
